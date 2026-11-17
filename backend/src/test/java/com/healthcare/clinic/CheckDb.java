@@ -11,9 +11,9 @@ import java.sql.Statement;
 public class CheckDb {
     @Test
     public void runFlywayMigrate() throws Exception {
-        String url = "jdbc:postgresql://pg-2ec02a9b-eakhalaivanp-46d0.i.aivencloud.com:15783/defaultdb?sslmode=require";
-        String user = "avnadmin";
-        String password = System.getenv("AIVEN_DB_PASSWORD");
+        String url = System.getenv().getOrDefault("DB_URL", "jdbc:postgresql://localhost:5432/clinic");
+        String user = System.getenv().getOrDefault("DB_USER", "postgres");
+        String password = System.getenv().getOrDefault("DB_PASSWORD", "");
         
         System.out.println("\n\n--- RUNNING FLYWAY MIGRATE ---");
         Flyway flyway = Flyway.configure()
